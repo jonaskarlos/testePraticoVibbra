@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j">
+
+<head>
+<title>Avalie os melhores locais de trabalho</title>
+
+<link rel="shortcut icon" href="#{request.contextPath}/img/accept.png" />
+<link rel="stylesheet" href="${facesContext.externalContext.requestContextPath}/css/template.css" />
+<link rel="stylesheet" href="${facesContext.externalContext.requestContextPath}/css/estilo.css" />
+<a:loadStyle src="/css/theme.xcss" />
+<a:loadStyle src="/css/theme.css" />
+<ui:insert name="script"></ui:insert>
+
+</head>
+
+<body onload="#{onLoadJS}">
+	<a:include viewId="/pages/layout/processando.xhtml" />
+
+	<a:status onstart="Richfaces.showModalPanel('modalPanelProcessandoId')"
+		onstop="Richfaces.hideModalPanel('modalPanelProcessandoId')" />
+	<div id="page">
+		<ui:include src="../layout/header.xhtml" />
+		<div id="menu">
+			<ui:include src="../layout/menu.xhtml" />
+		</div>
+		<div id="content">
+			<ui:insert name="breadcrumb"></ui:insert>
+			<ui:insert name="body"></ui:insert>
+		</div>
+		<!-- 
+		<div id="rodape">
+			<ui:insert name="footer">
+				<ui:include src="../layout/footer.xhtml" />
+			</ui:insert>
+		</div>
+		 -->
+	</div>
+
+</body>
+
+</html>

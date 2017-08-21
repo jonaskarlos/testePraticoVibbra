@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+   
+   <local-tx-datasource>
+      <jndi-name>avalieWebDatasource</jndi-name>
+      <use-java-context>true</use-java-context>
+      <connection-url>dbc:postgresql://localhost:5432/avalieBD</connection-url>
+      <driver-class>org.postgresql.Driver</driver-class>
+      <user-name>avalie</user-name>
+      <password>avalie</password>
+   </local-tx-datasource>
+    
+</datasources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	<h:form>
+	
+			<div  class="gradient-cabecalho" style="display:block; text-align: center;">
+					
+					<table style="border-collapse: collapse; display: inline-block; float: left;">
+						<tr>
+							<td  style="text-align: left; padding-left:10px; padding-right: 20px;" nowrap="nowrap" colspan="1">
+								 <h:outputText value="Olá,  "  rendered="#{identity.loggedIn}" />
+								 <h:commandLink action="home" value="#{jsfUtil.nomeUsuarioLogado}" 
+								 	rendered="#{identity.loggedIn}" styleClass="negrito" style="color:#008E17;"/>
+								 <!-- 
+								 <h:outputText value="#{jsfUtil.nomeUsuarioLogado}"
+								 			   rendered="#{identity.loggedIn}" styleClass="negrito" style="color:#008E17;"/>
+								  -->
+							</td>
+							<td width="80px" style="text-align: left;">
+								<h:commandLink action="#{identity.logout()}" value="Sair" styleClass="botao-cabecalho"
+									title="Clique aqui para sair do Sistema" rendered="#{identity.loggedIn}" />
+							</td>
+						</tr>
+					</table>
+					
+					<div style="display: inline-block; margin-left: -20%;">
+						
+					</div>
+			</div>
+		
+		</h:form>
+</ui:composition>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.com/products/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd"
+       no-conversation-view-id="/pages/home.xhtml">
+       
+    <page view-id="*" login-required="false">
+        <navigation>
+            <rule if-outcome="home">
+                <redirect view-id="/pages/home.xhtml"/>
+            </rule>
+            
+            <rule if-outcome="listarEstabelecimento">
+				<redirect view-id="/pages/busca/estabelecimentos/estabelecimentoList.xhtml" />
+			</rule>
+			
+			<rule if-outcome="listarCadastroUsuario">
+				<redirect view-id="/pages/cadastros/usuarios/usuarioList.xhtml" />
+			</rule>
+			
+			<rule if-outcome="adicionarUsuario">
+				<redirect view-id="/pages/cadastros/usuarios/usuarioEdit.xhtml" />
+			</rule>
+			
+			<rule if-outcome="listarAvaliacoes">
+				<redirect view-id="/pages/avaliacoes/avaliacaoList.xhtml" />
+			</rule>
+			
+			
+        </navigation>
+    </page>
+
+    <exception class="org.jboss.seam.framework.EntityNotFoundException">
+		<redirect view-id="/pages/error.xhtml">
+			<message severity="warn">Registro não encontrado</message>
+		</redirect>
+	</exception>
+	<exception class="javax.persistence.EntityNotFoundException">
+		<redirect view-id="/pages/error.xhtml">
+			<message severity="warn">Registro não encontrado</message>
+		</redirect>
+	</exception>
+	<exception class="javax.persistence.EntityExistsException">
+		<redirect view-id="/pages/error.xhtml">
+			<message severity="warn">Registro duplicado</message>
+		</redirect>
+	</exception>
+	<exception class="javax.persistence.OptimisticLockException">
+		<end-conversation />
+		<redirect view-id="/pages/error.xhtml">
+			<message severity="warn">Outro usuário mudou os mesmos dados, por favor tente novamente</message>
+		</redirect>
+	</exception>
+	<exception class="org.jboss.seam.security.AuthorizationException">
+		<redirect view-id="/pages/error.xhtml">
+			<message severity="error">Você não tem permissão para acessar este recurso do sistema.</message>
+		</redirect>
+	</exception>
+	 
+	<exception class="org.jboss.seam.security.NotLoggedInException">
+		<redirect view-id="/login.xhtml">
+			<message severity="warn">#{messages['org.jboss.seam.NotLoggedIn']}</message>
+		</redirect>
+	</exception>
+	
+	 
+	<exception class="javax.faces.application.ViewExpiredException">
+		<redirect view-id="/pages/error.xhtml">
+			<message severity="warn">Sua sessão expirou, por favor tente novamente</message>
+		</redirect>
+	</exception>
+	<exception class="org.jboss.seam.ConcurrentRequestTimeoutException"
+		log-level="trace">
+		<http-error error-code="503" />
+	</exception>
+	<exception>
+		<redirect view-id="/pages/error.xhtml">
+			<message severity="error">Erro inesperado, por favor tente novamente</message>
+		</redirect>
+	</exception>
+	<exception class="br.com.vibbra.avalieweb.exception.DAOException">
+		<redirect view-id="/pages/error.xhtml">
+			<message severity="error">#{messages[org.jboss.seam.handledException.message]}</message>
+		</redirect>
+	</exception>
+	<exception class="org.jboss.seam.web.FileUploadException">
+		<redirect view-id="/pages/error.xhtml">
+			<message>#{org.jboss.seam.handledException.message}</message>
+		</redirect>
+	</exception>    
+</pages>
+

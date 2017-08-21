@@ -1,0 +1,148 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j"
+	template="/pages/layout/template.xhtml">
+
+	
+	<ui:define name="script">
+		<a:loadScript src="#{url}/js/jquery.maskedinput-1.2.2.js"></a:loadScript>
+		<a:loadScript src="#{url}/js/util.js"></a:loadScript>
+	</ui:define>
+	
+	
+	<ui:param name="onLoadJS"
+		value="document.getElementById('frm_pesquisa:nomeField:txt_nome').focus();" />
+
+	<ui:define name="body">
+		<a:include viewId="/pages/avaliacoes/avaliacao_confirmacao_exclusao.xhtml" />
+		<h:form id="frm_pesquisa">
+			<rich:panel>
+				<h:outputText value="Pesquisar " styleClass="titulonegrito" />
+				<h:outputText value="Avaliações"
+					styleClass="titulo_cabecalho" />
+				<rich:separator height="1px"></rich:separator>
+				<br />
+				
+				<h:panelGrid columns="3">
+					<a:commandButton id="btn_pesq" value="Pesquisar"
+						action="#{avaliacaoAction.pesquisar()}"
+						reRender="pn_pesquisa, pn_lista"
+						title="Executar Pesquisa"
+						onclick="Richfaces.showModalPanel('modalPanelProcessandoId');"
+						oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');" />
+					<a:commandButton id="btn_limpar" value="Limpar"
+						action="#{avaliacaoAction.limpar()}" immediate="true"
+						reRender="pn_pesquisa" title="Limpar Campos" />
+					<a:commandButton id="btn_adicionar" value="Adicionar"
+						action="#{avaliacaoAction.adicionar()}" title="Adicionar Nova Avaliação" />
+				</h:panelGrid>
+				<rich:hotKey selector="#pn_pesquisa" key="return"
+					handler="#{rich:element('btn_pesq')}.onclick();return false;" />
+			</rich:panel>
+			<rich:messages id="messages" styleClass="message" layout="table"
+				globalOnly="true" errorClass="errormsg" infoClass="infomsg"
+				warnClass="warnmsg">
+			</rich:messages>
+			<br />
+			<h:panelGroup id="pn_lista">
+				<h:outputText styleClass="resultados_encontrados"
+					value="#{avaliacaoAction.avaliacaoLista.size()} #{avaliacaoAction.avaliacaoLista.size() eq 1? ' Avaliacao Encontrado.':' Avaliacaos Encontrados.'}"
+					rendered="#{not empty avaliacaoAction.avaliacaoLista and avaliacaoAction.avaliacaoLista != null}" />
+
+				<br />
+				<rich:dataTable value="#{avaliacaoAction.avaliacaoLista}" var="avaliacaoBean"
+					rows="#{avaliacaoAction.numeroLinha}"
+					rendered="#{not empty avaliacaoAction.avaliacaoLista}" sortMode="single"
+					id="dtt_avaliacao" rowClasses="tabela-linha1, tabela-linha2"
+					rowKeyVar="rowNum" width="100%">
+					<rich:column styleClass="alinharCentro " width="5px">
+						<f:facet name="header">Nº</f:facet>
+						<h:outputText value="#{rowNum+1}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Estabelecimento" />
+						</f:facet>
+						<h:outputText value="#{avaliacaoBean.estabelecimento.nome}" />
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Atendimento" />
+						</f:facet>
+						<center>
+							<h:outputText value="#{avaliacaoBean.atendimento}" />
+						</center>
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Preço" />
+						</f:facet>
+						<center>
+							<h:outputText value="#{avaliacaoBean.preco}" />
+						</center>
+						
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Conforto" />
+						</f:facet>
+						<center>
+							<h:outputText value="#{avaliacaoBean.conforto}" />
+						</center>
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Ruído" />
+						</f:facet>
+						<center>
+							<h:outputText value="#{avaliacaoBean.ruido}" />
+						</center>
+					</rich:column>
+					<rich:column>
+						<f:facet name="header">
+							<h:outputText value="Geral" />
+						</f:facet>
+						<center>
+							<h:outputText value="#{avaliacaoBean.geral}" />
+						</center>
+					</rich:column>
+
+					<rich:column width="50px" rendered="true">
+						<f:facet name="header">
+							<h:outputText value="Ações" />
+						</f:facet>
+						<center>
+							<h:panelGrid columns="2">
+								<a:commandLink
+									action="#{avaliacaoAction.editar(avaliacaoBean)}" ajaxSingle="true" reRender="pn_lista">
+									<h:graphicImage url="/img/edit.png" style="border:0px;padding:0px" title="Editar" />
+								</a:commandLink>
+								
+								<a:commandLink
+									action="#{avaliacaoAction.prepararExclusao(avaliacaoBean)}"
+									ajaxSingle="true" reRender="pn_lista, mpn_confirmacao_exclusao"
+									onclick="Richfaces.showModalPanel('modalPanelProcessandoId');"
+									oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');">
+									<h:graphicImage url="/img/cross.png" style="border:0px" title="Excluir" />
+								</a:commandLink>
+								
+							</h:panelGrid>
+						</center>
+					</rich:column>
+					<f:facet name="footer">
+						<rich:datascroller renderIfSinglePage="false" for="dtt_avaliacao"
+							onpagechange="Richfaces.showModalPanel('modalPanelProcessandoId');"
+							oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');" />
+					</f:facet>
+				</rich:dataTable>
+			</h:panelGroup>
+		</h:form>
+	</ui:define>
+</ui:composition>

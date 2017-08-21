@@ -1,0 +1,111 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:mj="http://mojarra.dev.java.net/mojarra_ext"
+	template="/pages/layout/template.xhtml">
+	
+	<ui:define name="script">
+		<a:loadScript src="#{url}/js/jquery.maskedinput-1.2.2.js"></a:loadScript>
+		<a:loadScript src="#{url}/js/util.js"></a:loadScript>
+	</ui:define>
+	
+	<ui:param name="onLoadJS" value="document.getElementById('frm_edit:nomeField:txt_nome').focus();" />
+
+	<ui:define name="body">
+
+		<h:form id="frm_edit">
+			<rich:panel>
+				<h:outputText value="#{!estabelecimentoAction.modoEdicao ? 'Cadastrar': 'Editar'} " styleClass="titulonegrito"/>
+				<h:outputText value="Estabelecimento" styleClass="titulo_cabecalho"/>
+				<rich:separator height="1px"></rich:separator>
+				<br/>
+				<rich:messages id="messages" styleClass="message" layout="table" 
+						errorClass="errormsg" globalOnly="true" warnClass="warnmsg" infoClass="infomsg">
+					</rich:messages>
+				<h:panelGrid id="pn_edit">
+
+					<h:panelGrid columns="3">
+						<s:decorate id="nomeField" template="/pages/layout/edit.xhtml">
+							<ui:define name="label">Nome:</ui:define>
+							<h:inputText id="txt_nome" label="Nome" required="true"
+								maxlength="255" size="45"
+								value="#{estabelecimentoAction.estabelecimentoEdicao.nome}">
+							</h:inputText>
+						</s:decorate>
+						
+						<s:decorate id="enderecoField" template="/pages/layout/edit.xhtml">
+							<ui:define name="label">Endereço:</ui:define>
+							<h:inputText id="txt_endereco" label="Endereço" required="true"
+								maxlength="255" size="45"
+								value="#{estabelecimentoAction.estabelecimentoEdicao.endereco}">
+							</h:inputText>
+						</s:decorate>
+						
+						<s:decorate id="tipoField" for="cmb_tipo" template="/pages/layout/edit.xhtml">
+							<ui:define name="label">
+								<h:outputText value="Tipo:" />
+							</ui:define>
+							<h:selectOneMenu id="cmb_tipo"
+								value="#{estabelecimentoAction.estabelecimentoEdicao.tipo}" style="width:150px"
+								label="Tipo" required="true">
+								<s:selectItems var="tipoEstabelecimento"
+									value="#{tipoEstabelecimentoListaFactory}"
+									label="#{tipoEstabelecimento.descricao}" />
+								<s:convertEnum />
+							</h:selectOneMenu>
+						</s:decorate>
+						
+						<s:decorate id="cidadeField" template="/pages/layout/edit.xhtml">
+							<ui:define name="label">Cidade:</ui:define>
+							<h:inputText id="txt_cidade" label="Cidade" required="true"
+								maxlength="255" size="45"
+								value="#{estabelecimentoAction.estabelecimentoEdicao.cidade}">
+							</h:inputText>
+						</s:decorate>
+						
+						<s:decorate id="estadoField" template="/pages/layout/edit.xhtml">
+							<ui:define name="label">Estado:</ui:define>
+							<h:inputText id="txt_estado" label="Estado" required="true"
+								maxlength="255" size="45"
+								value="#{estabelecimentoAction.estabelecimentoEdicao.estado}">
+							</h:inputText>
+						</s:decorate>
+						
+						<s:decorate id="paisField" template="/pages/layout/edit.xhtml">
+							<ui:define name="label">País:</ui:define>
+							<h:inputText id="txt_pais" label="País" required="true"
+								maxlength="255" size="45"
+								value="#{estabelecimentoAction.estabelecimentoEdicao.pais}">
+							</h:inputText>
+						</s:decorate>
+						
+					</h:panelGrid>
+				</h:panelGrid>
+
+				<div class="actionbuttons">
+					<h:panelGrid columns="3">
+						<a:commandButton id="btn_voltar" value="Voltar" immediate="true"
+							action="#{estabelecimentoAction.voltar()}" type="button"
+							title="Página Anterior" />
+						<a:commandButton value="Limpar" id="btn_limpar"
+							rendered="#{!estabelecimentoAction.modoEdicao}"
+							action="#{estabelecimentoAction.limparCamposEdicao()}" title="Limpar"
+							reRender="pn_edit" immediate="true" />
+						<a:commandButton value="Salvar" id="btn_salvar"
+							action="#{estabelecimentoAction.salvar()}" title="Salvar"
+							reRender="pn_edit" />
+					</h:panelGrid>	
+				</div>
+
+				<rich:hotKey selector="#pn_edit" key="return"
+					handler="#{rich:element('btn_salvar')}.onclick();return false;" />
+			</rich:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,103 @@
+body,html {
+	height: 100%;
+	margin: 0
+} /* Necessário */
+#page {
+	position: relative;
+	min-height: 100%; /* Para browsera modernos */
+	height: auto !important; /* Para browsera modernos */
+	height: 100%; /* Para o IE6 */
+	width: 100%;
+}
+
+div#menu {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+div#info {
+	list-style-type: none;
+	list-style-image: url("../img/msginfo.png");
+	list-style-position: inside;
+	font-weight: bold;
+}
+
+div#error {
+	list-style-type: none;
+	list-style-image: url("../img/msgerrror.png");
+	list-style-position: inside;
+	font-weight: bold;
+}
+
+#topo {
+	/*  background:transparent url(../images/waves.jpg) no-repeat right 0px;*/
+	height: 68px;
+}
+
+div#logoEsquerda {
+	/* position: relative; */
+	float: left;
+	top: 5px;
+	display: block;
+	margin-left: 15px;
+}
+
+div#logoCentro {
+	/* position: relative;
+	text-align : center;
+	margin : 0 auto;
+	top: 0px; */
+}
+
+.dataGrid{
+	font-family: verdana;
+	font-size: 12px;
+	
+}
+
+.cabecalhoOrgao{
+	color: #34550d;
+	text-decoration: none;
+}
+
+div#logoDireita {
+	/* position: relative; */
+	float: right;
+	top: 0px;
+	border: 0px;
+	display: block;
+	margin-right: 15px;
+}
+
+div#content {
+	padding-top: 5px;
+	padding-bottom: 50px;
+	/* Esse padding é o mesmo valor da altura do rodapé */
+	margin: 0 15px;
+}
+
+div#rodape {
+	position: absolute;
+	bottom: 0;
+	color: 7f7f7f;
+	font-size: 11px;
+	text-align: left;
+	vertical-align: middle;
+	width: 80%;
+	margin-top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	height:25px;  
+}
+
+.linkMenu {
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.negrito {
+	font-weight: bold;
+}
+
+	

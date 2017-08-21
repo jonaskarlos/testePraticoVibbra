@@ -1,0 +1,486 @@
+html {
+	overflow-y: scroll;
+}
+
+body {
+	font-size: 12px;
+	margin: 0px;
+}
+
+a img {
+	border: none;
+}
+
+h1 {
+	font-size: 1.6em;
+	margin-top: 0;
+}
+
+input[type=submit],input[type=button] {
+	font-size: 12px;
+	margin: 5px 5px 5px 0;
+	cursor: pointer;
+}
+
+input[type=text],input[type=password],textarea {
+	font-size: 12px;
+	padding-left: 1px;
+}
+
+select {
+	font-size: 13px;
+}
+
+.tableControl,.actionButtons {
+	width: 100%;
+}
+
+.tableControl a {
+	padding-left: 10px;
+}
+
+.tableControl {
+	text-align: right;
+}
+
+table.radio {
+	border: 0;
+}
+
+table.radio td {
+	padding: 0 2px;
+}
+
+table.radio input[type=radio] {
+	vertical-align: bottom;
+}
+
+.footer {
+	text-align: center;
+	font-size: 11px;
+	margin-bottom: 10px;
+}
+
+.rich-table {
+	width: 100%;
+}
+
+.body {
+	padding: 30px;
+}
+
+.gradient-cabecalho {
+	padding: 0px 0px;
+	margin: 0px 0px;
+	width: 100%;
+	padding-left: 0px;
+	font-size: 12px;
+	height: 23px;
+	background: url(../img/background-cabecalho.jpg) repeat-x;
+	text-align: left;
+}
+
+.gradient-cabecalho td {
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-right-color: #A8A8A8;
+	padding: 0px 0px;
+	margin: 0px 0px;
+	text-align: left;
+	vertical-align: middle;
+	height: 19px;
+}
+
+.message {
+	padding-top: 3px;
+	width: 100%;
+}
+
+.message li {
+	background: no-repeat left center;
+	padding-top: 1px;
+	padding-left: 20px;
+	margin-left: 3px;
+}
+
+.message li.infomsg {
+	background-image: url(../img/msginfo.png);
+	margin-right: 5px;
+}
+
+.message li.errormsg {
+	background-image: url(../img/msgerror.png);
+	margin-right: 5px;
+}
+
+.message li.warnmsg {
+	background-image: url(../img/msgwarn.png);
+	margin-right: 5px;
+}
+
+.name_ao_lado {
+	vertical-align: top;
+	font-weight: bold;
+	/*width: 115px;*/
+	float: left;
+	padding: 5px;
+	margin-top: 3px;
+	clear: left;
+}
+
+.name {
+	vertical-align: top;
+	font-weight: normal;
+	float: left;
+	clear: left;
+	padding-bottom: 1px;
+	border-width: 1px;
+	border: 1px;
+	font-size: 12px;
+}
+
+.message {
+	padding: 5px;
+	list-style: none;
+	border: 0;
+	background: none;
+	padding: 0;
+	color: #000000;
+	margin: 5px 0 8px 0;
+	font-size: 12px;
+}
+
+.error {
+	float: left;
+	padding: 5px;
+}
+
+.errors {
+	color: #FF0000;
+	vertical-align: middle;
+}
+
+img.errors {
+	padding: 2px;
+}
+
+.errors input,.errors textarea,.errors select {
+	border: 1px solid red !important;
+}
+
+.required {
+	color: #FF0000;
+	font-weight: bold;
+	padding-left: 2px;
+	font-size: 14px;
+}
+
+.rich-stglpanel-body {
+	overflow: auto;
+}
+
+/* the specificity here is necessary to override the defaults */
+/*
+.rich-panel .rich-panel-header,
+.rich-stglpanel .rich-stglpanel-header {
+	padding: 2px 3px;
+}*/
+.rich-panel input[type=submit],.rich-panel input[type=button],.rich-tabpanel input[type=submit],.rich-tabpanel input[type=button]
+	{
+	margin-bottom: 0;
+}
+
+.tableControl input[type=submit],.tableControl input[type=button],.tableControl select
+	{
+	margin: 5px 0 5px 5px;
+}
+
+/* I don't know why this is necessary, but the select is off by a pixel on the top and is padding too much on the left */
+.tableControl select {
+	margin-left: 2px;
+	position: relative;
+	top: 1px;
+}
+
+.actionButtons {
+	padding-left: 1px;
+}
+
+.actionButtons select {
+	margin: 5px 5px 5px 0;
+	vertical-align: bottom;
+}
+
+.rich-toolbar-item a {
+	text-decoration: none;
+}
+
+.rich-toolbar-item a:hover,.rich-ddmenu-label-select {
+	text-decoration: underline;
+}
+
+.rich-toolbar-item .rich-menu-item a:hover {
+	text-decoration: none;
+}
+
+.rich-datalist {
+	list-style: square;
+	margin: 6px 0 1px 0;
+	padding-left: 18px;
+}
+
+.rich-list-item {
+	padding-bottom: 4px;
+}
+
+/*
+div.info {
+	font-size: 1.2em;
+}
+*/
+ul.bullets {
+	list-style: square;
+}
+
+ul.bullets li {
+	padding-bottom: 2px;
+}
+
+td.action {
+	text-align: center;
+	width: 8em;
+	white-space: nowrap;
+}
+
+td.action a {
+	padding-left: 1px;
+	padding-right: 1px;
+}
+
+table.radio {
+	border: 0;
+}
+
+table.radio td {
+	padding: 0 2px;
+}
+
+table.radio input[type=radio] {
+	vertical-align: bottom;
+}
+
+.alinharCentro {
+	text-align: center;
+}
+
+.alinharDireita {
+	text-align: right;
+}
+
+.alinharEsquerda {
+	text-align: left;
+}
+
+.aviso_antigo {
+	background-color: #E8E7DC;
+	text-align: justify;
+	font-size: 13px;
+	border: 0px;
+}
+
+.aviso_recente {
+	background: #F7E7DC;
+	font-family: "Segoe UI", "Dejavu Sans";
+	text-align: justify;
+	font-size: 13px;
+	font-weight: bold;
+	border: 0px;
+}
+
+.aviso_titulo {
+	text-align: justify;
+	font-size: 18px;
+	font-weight: bold;
+	color: #E04914;
+}
+
+.titulo {
+	vertical-align: top;
+	font-weight: bold;
+	float: left;
+	clear: left;
+	padding-left: 2px;
+	text-decoration: underline;
+}
+
+.titulo_detalhe {
+	vertical-align: top;
+	font-weight: bold;
+	float: left;
+	clear: left;
+	padding-left: 4px;
+	text-decoration: underline;
+}
+
+.valor_detalhe {
+	float: left;
+	padding-left: 4px;
+}
+
+.value {
+	float: left;
+	padding: 2px;
+	font-size: 12px;
+}
+
+.negrito {
+	font-weight: bold;
+}
+
+.largura300Px {
+	width: 300px;
+}
+
+.largura200Px {
+	width: 200px;
+}
+
+.largura250Px {
+	width: 250px;
+}
+
+.botao-cabecalho {
+	padding: 0px 0px;
+	width: 100%;
+	height: 100%;
+	display: block;
+	border-style: none;
+	border-width: 1px;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	font-weight: bold;
+}
+
+.valor {
+	float: left;
+	padding-left: 2px;
+}
+
+.value {
+	float: left;
+	padding: 2px;
+}
+
+.tabela-linha1 {
+	/*background-color: #DFDFDF;*/
+	background-color: #ECF3FE;
+}
+
+.tabela-linha1:hover {
+	background-color: #9dad9c;
+	/*background-color: #FFEBDA;*/
+	background-color: #B0E4F0;
+}
+
+.tabela-linha2:hover {
+	/*background-color: #9dad9c;*/
+	/*background-color: #FFEBDA;*/
+	background-color: #B0E4F0;
+}
+
+.tabela-linha2 {
+	/*background-color: white;*/
+	background-color: #FCFFFE
+}
+
+.rodape-linha1 {
+	background-color: #DFDFDF;
+	font-weight: bold;
+	text-align: right;
+}
+
+.rodape-linha2 {
+	background-color: white;
+	font-weight: bold;
+	text-align: right;
+}
+
+.prop table {
+	padding: 0px 0px;
+	margin: 0px 0px;
+	margin-top: 5px;
+	border-collapse: collapse;
+	line-height: 12px;
+}
+
+.rich-messages-label {
+	padding-left: 20px;
+}
+
+.warnmsg {
+	background: transparent url(../img/msgwarn.png) no-repeat left 0px;
+	border-width: 1px;
+	border-left-width: 10px;
+	border-color: #4A75B5;
+	background-color: #dfe6ed;
+	border-style: solid;
+	padding: 3px;
+	padding-left: 10px;
+}
+
+.errormsg {
+	background: transparent url(../img/msgerror.png) no-repeat left 0px;
+	border-width: 1px;
+	border-left-width: 10px;
+	border-color: #c00202;
+	background-color: #eadcdc;
+	border-style: solid;
+	padding: 3px;
+}
+
+.infomsg {
+	background: transparent url(../img/msginfo.png) no-repeat left 0px;
+	border-width: 1px;
+	border-left-width: 10px;
+	border-color: #4A75B5;
+	background-color: #dfe6ed;
+	border-style: solid;
+	padding: 3px;
+}
+
+.msgInfo {
+	font-weight: bold;
+	color: orange;
+}
+
+.msg_erro {
+	font-weight: bold;
+	color: red;
+	padding: 2px;
+	vertical-align: middle;
+}
+
+.dr-menu-label {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 13px;
+}
+
+.rich-menu-item-label {
+	color: #000;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12px;
+}
+
+.dr-table-subheader{
+	background-color: #4A75B5;
+}
+
+.dr-table-subheadercell{
+	color: white;
+	font-size: 12px;
+}
+
+.dr-table-cell {
+	font-size: 12px;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="/pages/layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="loginForm">
+
+			<rich:panel style="width:400px; margin:100px auto;" styleClass="alinharCentro">
+				 <s:label value="Login do Sistema" styleClass="titulonegrito"/>
+				<rich:separator height="2px"></rich:separator>
+				<br/>
+					<h:panelGrid columns="2" columnClasses="largura25porcento,largura50porcento">
+						<h:panelGroup>
+							<h:outputLabel value="" />
+							
+						</h:panelGroup>
+						<h:panelGroup>
+							<s:decorate id="loginField" template="/pages/layout/edit_ao_lado.xhtml">
+								<ui:define name="label">Email: </ui:define>
+								<h:inputText style="width:128px" id="txt_email" value="#{credentials.username}"
+									label="Login" maxlength="15">
+								</h:inputText>
+							</s:decorate>
+		
+							<s:decorate id="SenhaField" template="/pages/layout/edit_ao_lado.xhtml">
+								<ui:define name="label">Senha: </ui:define>
+								<h:inputSecret style="width:128px" id="password" value="#{credentials.password}"
+									label="Senha" maxlength="8" />
+							</s:decorate>
+						</h:panelGroup>
+					</h:panelGrid>
+					<br />
+					<h:messages globalOnly="true"/>					
+					<div align="center">
+						<h:commandButton  id="submit" value="Login"
+								action="#{identity.login}" title="Efetuar Login" />
+					</div>
+
+			</rich:panel>
+
+		</h:form>
+
+ </ui:define>
+</ui:composition>

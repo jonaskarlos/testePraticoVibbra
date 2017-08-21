@@ -1,0 +1,17 @@
+#Sat Aug 19 13:52:12 GMT-03:00 2017
+action.package=br.com.vibbra.avalieweb.session
+action.sources=/avalieWeb-ejb/ejbModule
+eclipse.preferences.version=1
+model.package=br.com.vibbra.avalieweb.entity
+model.sources=/avalieWeb-ejb/ejbModule
+seam.ear.project=avalieWeb-ear
+seam.ejb.project=avalieWeb-ejb
+seam.project.connection.profile=New PostgreSQL
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/avalieWeb/WebContent
+seam.runtime.name=seam
+seam.test.creating=false
+seam.test.project=avalieWeb-test
+test.package=org.domain.avalieweb.test
+test.sources=/avalieWeb-test/test-src

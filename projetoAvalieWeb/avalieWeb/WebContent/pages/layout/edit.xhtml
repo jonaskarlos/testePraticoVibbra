@@ -1,0 +1,36 @@
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:rich="http://richfaces.org/rich"
+                 xmlns:a="http://richfaces.org/a4j"
+                 xmlns:s="http://jboss.com/products/seam/taglib">
+
+    <div class="prop">
+    <h:panelGrid columns="1">
+    	<h:panelGroup >
+    	 <s:label styleClass="name #{invalid?'errors':''}">
+            <ui:insert name="label"/>
+            <s:span styleClass="required" rendered="#{required}">*</s:span>
+        </s:label>
+        
+        </h:panelGroup>
+        <h:panelGroup>
+        <span class="value #{invalid?'errors':''}">
+        	<a:outputPanel>
+            	<s:validateAll>
+                	<ui:insert/>
+            	</s:validateAll>
+            	<rich:toolTip rendered="#{invalid}" styleClass="toolTip-erro">
+            			<s:message />
+        		</rich:toolTip>	
+            </a:outputPanel>
+            
+        </span>
+        </h:panelGroup>
+       
+        
+        </h:panelGrid>
+    </div>
+
+</ui:composition>

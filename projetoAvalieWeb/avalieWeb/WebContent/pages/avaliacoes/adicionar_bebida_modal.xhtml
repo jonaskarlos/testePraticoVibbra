@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j">
+<body>
+
+		<rich:modalPanel id="mpn_adicao_bebida" resizeable="false"
+			showWhenRendered="#{avaliacaoAction.exibirModalAdicaoBebida}"
+			width="400" height="200" autosized="false" style="border-spacing:0px">
+
+			<f:facet name="header">
+				<h:outputText value="Bebida" />
+			</f:facet>
+
+			<!-- Detail: Tipos de Bebidas -->
+			<h:form id="frm_pesquisa_edit_detail">
+
+				<rich:messages id="messages" styleClass="message" layout="table"
+					errorClass="errormsg" globalOnly="true" warnClass="warnmsg"
+					infoClass="infomsg">
+				</rich:messages>
+
+				<rich:panel rendered="#{avaliacaoAction.modoEdicaoBebida}">
+					<h:outputText value="Adicionar Tipo de Bebida" styleClass="titulo_cabecalho" />
+					<rich:separator height="1px"></rich:separator>
+					<br />
+
+					<h:panelGrid id="pn_edit_bebida_detail" columns="1">
+						<s:decorate id="tipoBebidaField" template="/pages/layout/edit.xhtml">
+							<ui:define name="label">Tipo de Bebida:</ui:define>
+							<h:inputText id="txt_tipo_bebida" value="#{avaliacaoAction.avaliacaoBebida.tipoBebida}" maxlength="30" size="40"
+								label="Tipo de Bebida" required="true">
+							</h:inputText>
+						</s:decorate>
+					</h:panelGrid>
+
+					<h:panelGrid columns="2">
+					<a:commandButton value="Cancelar" id="btn_cancelar_add_bebida"
+						action="#{avaliacaoAction.cancelarAddBebida()}"
+						title="Cancelar" ajaxSingle="true" 
+						reRender="mpn_adicao_bebida" />
+					<a:commandButton value="Salvar"
+						id="btn_salvar"
+						action="#{avaliacaoAction.salvarTipoBebida()}"
+						title="Salvar Tipo de Bebida"
+						reRender="frm_pesquisa_edit_detail, pn_lista_bebida, mpn_adicao_bebida" />
+				</h:panelGrid>
+				</rich:panel>
+		
+			</h:form>
+		</rich:modalPanel>
+</body>
+</html>

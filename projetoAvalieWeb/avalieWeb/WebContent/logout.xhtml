@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j">
+
+<head>
+	<title>Avalie locais para trabalhar</title>
+	
+	<link rel="shortcut icon" href="#{request.contextPath}/img/gtcell-icone.png" />
+	<link rel="stylesheet" href="${facesContext.externalContext.requestContextPath}/css/template.css" />
+	
+	<a:loadStyle src="/css/theme.xcss" />
+	<a:loadStyle src="/css/theme.css" />
+	
+	<meta http-equiv="Refresh" content="3; URL=http://localhost:8080/avalie/login.seam"/> 
+</head>
+	<body>
+		<a:include viewId="/pages/layout/processando.xhtml" />
+		<a:status onstart="Richfaces.showModalPanel('modalPanelProcessandoId')" 
+						onstop="Richfaces.hideModalPanel('modalPanelProcessandoId')" />
+		<rich:panel style="width:470px; margin:0px auto;">
+	 		<h:panelGrid styleClass="alinharCentro" width="100%">
+	 				<rich:messages id="messages" styleClass="message" layout="table"
+						globalOnly="true" errorClass="errormsg" infoClass="infomsg"
+						warnClass="warnmsg">
+					</rich:messages>
+				<h:panelGroup>
+					<h:graphicImage value="/img/ajax-loader_reticencias.gif"></h:graphicImage>
+				</h:panelGroup>
+	 		</h:panelGrid>
+		</rich:panel>		
+	
+	</body>
+</html>

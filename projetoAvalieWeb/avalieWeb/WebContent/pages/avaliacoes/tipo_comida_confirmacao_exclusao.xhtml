@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j">
+<body>
+
+	<rich:modalPanel id="mpn_confirmacao_exclusao_comida" resizeable="false"
+		showWhenRendered="#{avaliacaoAction.exibirModalExclusaoTipoComida}" width="350"
+		height="80" autosized="true" style="border-spacing:0px">
+		<f:facet name="header">
+			<h:outputText value="Excluir Tipo de Comida" />
+		</f:facet>
+		<f:facet name="controls">
+			<h:graphicImage value="/img/cancel.png" style="cursor:pointer"
+				onclick="Richfaces.hideModalPanel('mpn_confirmacao_exclusao_comida')" />
+		</f:facet>
+
+		<h:form id="frm_modal_confirmacao_tipo_comida">
+			<h:outputText value="Tem certeza que deseja excluir o Tipo de Comida?" />
+			<p />
+			<center>
+				<h:panelGrid columns="3">
+					<a:commandButton id="btn_confirm_exclusao"
+						action="#{avaliacaoAction.excluirTipoComida()}" value="Sim"
+						reRender="pn_lista_comida, messages, mpn_confirmacao_exclusao_comida"
+						onclick="Richfaces.showModalPanel('modalPanelProcessandoId');"
+						style="width:70px"
+						oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');">
+					</a:commandButton>
+					<rich:spacer width="5" />
+					<a:commandButton value="Não" style="width:70px"
+						id="btn_cancel_exclusao" reRender="mpn_confirmacao_exclusao_comida"
+						action="#{avaliacaoAction.cancelarExclusaoComida()}" />
+				</h:panelGrid>
+				<rich:messages id="messages" styleClass="message" layout="table"
+					globalOnly="true" errorClass="errormsg" infoMarkerClass="infomsg"
+					warnClass="warnmsg">
+					<f:facet name="errorMarker">
+						<h:graphicImage url="/img/msgerror.png" />
+					</f:facet>
+					<f:facet name="warnMarker">
+						<h:graphicImage url="/img/msgwarn.png" />
+					</f:facet>
+					<f:facet name="infoMarker">
+						<h:graphicImage url="/img/msginfo.png" />
+					</f:facet>
+				</rich:messages>
+			</center>
+		</h:form>
+	</rich:modalPanel>
+</body>
+</html>

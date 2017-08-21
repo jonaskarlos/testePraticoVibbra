@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Persistence deployment descriptor for dev profile -->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" 
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" 
+             version="1.0">
+             
+   <persistence-unit name="avalieWeb">
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+      <jta-data-source>java:/avalieWebDatasource</jta-data-source>
+      
+      <class>br.com.vibbra.avalieweb.entity.Avaliacao</class>
+      <class>br.com.vibbra.avalieweb.entity.AvaliacaoBebida</class>
+      <class>br.com.vibbra.avalieweb.entity.AvaliacaoComida</class>
+      <class>br.com.vibbra.avalieweb.entity.Estabelecimento</class>
+      <class>br.com.vibbra.avalieweb.entity.Usuario</class>
+      <!-- The <jar-file> element is necessary if you put the persistence.xml in the WAR and the classes in the JAR -->
+      <!--
+      <jar-file>../../vehicles.jar</jar-file>
+      -->
+      <properties>
+         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+         <property name="hibernate.show_sql" value="false"/>
+         <property name="hibernate.format_sql" value="false"/>
+         
+         <property name="hibernate.generate_statistics" value="true"/>
+ 		 <property name="hibernate.cache.use_structured_entries" value="true"/>
+		 <property name="hibernate.jdbc.batch_size" value="400" />
+		 <property name="hibernate.jdbc.fetch_size" value="50" />
+		 <property name="hibernate.max_fetch_depth" value="4"/>
+		 <property name="hibernate.default_batch_fetch_size" value="16"/>
+		 <property name="hibernate.connection.autocommit" value="false" />
+		 <property name="hibernate.hbm2ddl.auto" value="validate" />
+         <property name="jboss.entity.manager.factory.jndi.name" value="java:/avalieWebEntityManagerFactory"/>
+      </properties>
+   </persistence-unit>
+    
+</persistence>
