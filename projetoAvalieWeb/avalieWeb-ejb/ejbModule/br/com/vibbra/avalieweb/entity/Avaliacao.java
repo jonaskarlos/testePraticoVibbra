@@ -12,15 +12,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tb_avaliacao")
+@NamedQueries({
+	@NamedQuery(name = Avaliacao.NAMED_QUERY_PESQUISAR_AVALIACAO_POR_USUARIO, 
+				query = "select a from Avaliacao a " +
+						"inner join a.usuario u " +
+						"where u.id = :usuarioId "),
+						
+	@NamedQuery(name = Avaliacao.NAMED_QUERY_PESQUISAR_POR_USUARIO_TIPO_ENDERECO, 
+				query = "select a from Avaliacao a " +
+						"inner join a.estabelecimento e " + 
+						"left join a.usuario u " + 
+						"where (:emailAux is null or u.email = :email) " + 
+						"  and (:tipoAux is null or e.tipo = :tipo ) " + 
+						"  and (:enderecoAux like '' or upper(e.endereco) like (:endereco))")
+})
 public class Avaliacao extends GenericEntity {
 
 	private static final long serialVersionUID = 5110541363624012198L;
+	
+	public static final String NAMED_QUERY_PESQUISAR_AVALIACAO_POR_USUARIO="pesquisarAvaliacaoPorUsuario";
+	public static final String NAMED_QUERY_PESQUISAR_POR_USUARIO_TIPO_ENDERECO="pesquisarPorUsurioTipoEndereco";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="sq_avaliacao")
@@ -30,7 +49,7 @@ public class Avaliacao extends GenericEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="id_usuario")
-	private Usuario ususario;
+	private Usuario usuario;
 	
 	@Column(name="txt_velocidade_internet")
 	private String velocidadeInternet;
@@ -76,12 +95,12 @@ public class Avaliacao extends GenericEntity {
 		this.id = id;
 	}
 
-	public Usuario getUsusario() {
-		return ususario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsusario(Usuario ususario) {
-		this.ususario = ususario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getVelocidadeInternet() {

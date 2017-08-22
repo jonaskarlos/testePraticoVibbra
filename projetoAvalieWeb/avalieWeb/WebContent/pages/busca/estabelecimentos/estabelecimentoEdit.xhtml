@@ -30,20 +30,12 @@
 					</rich:messages>
 				<h:panelGrid id="pn_edit">
 
-					<h:panelGrid columns="3">
+					<h:panelGrid columns="2">
 						<s:decorate id="nomeField" template="/pages/layout/edit.xhtml">
 							<ui:define name="label">Nome:</ui:define>
 							<h:inputText id="txt_nome" label="Nome" required="true"
 								maxlength="255" size="45"
 								value="#{estabelecimentoAction.estabelecimentoEdicao.nome}">
-							</h:inputText>
-						</s:decorate>
-						
-						<s:decorate id="enderecoField" template="/pages/layout/edit.xhtml">
-							<ui:define name="label">Endereço:</ui:define>
-							<h:inputText id="txt_endereco" label="Endereço" required="true"
-								maxlength="255" size="45"
-								value="#{estabelecimentoAction.estabelecimentoEdicao.endereco}">
 							</h:inputText>
 						</s:decorate>
 						
@@ -59,6 +51,14 @@
 									label="#{tipoEstabelecimento.descricao}" />
 								<s:convertEnum />
 							</h:selectOneMenu>
+						</s:decorate>
+						
+						<s:decorate id="enderecoField" template="/pages/layout/edit.xhtml">
+							<ui:define name="label">Endereço:</ui:define>
+							<h:inputText id="txt_endereco" label="Endereço" required="true"
+								maxlength="255" size="45"
+								value="#{estabelecimentoAction.estabelecimentoEdicao.endereco}">
+							</h:inputText>
 						</s:decorate>
 						
 						<s:decorate id="cidadeField" template="/pages/layout/edit.xhtml">

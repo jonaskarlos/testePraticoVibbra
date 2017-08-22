@@ -26,6 +26,11 @@
 				<redirect view-id="/pages/avaliacoes/avaliacaoList.xhtml" />
 			</rule>
 			
+			<rule if-outcome="loginUsuario">
+				<redirect view-id="/pages/cadastros/loginUsuario/loginUsuario.xhtml" />
+			</rule>
+			
+			
 			
         </navigation>
     </page>

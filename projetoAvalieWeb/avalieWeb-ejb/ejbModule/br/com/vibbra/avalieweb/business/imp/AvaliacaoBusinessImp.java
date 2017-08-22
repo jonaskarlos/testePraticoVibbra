@@ -1,5 +1,7 @@
 package br.com.vibbra.avalieweb.business.imp;
 
+import java.util.List;
+
 import org.jboss.seam.annotations.AutoCreate;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
@@ -8,6 +10,8 @@ import br.com.vibbra.avalieweb.business.AvaliacaoBebidaBusiness;
 import br.com.vibbra.avalieweb.business.AvaliacaoBusiness;
 import br.com.vibbra.avalieweb.business.AvaliacaoComidaBusiness;
 import br.com.vibbra.avalieweb.entity.Avaliacao;
+import br.com.vibbra.avalieweb.entity.Usuario;
+import br.com.vibbra.avalieweb.enumeration.TipoEstabelecimentoEnum;
 import br.com.vibbra.avalieweb.exception.BusinessException;
 import br.com.vibbra.avalieweb.persistence.AvaliacaoDAO;
 
@@ -25,6 +29,17 @@ public class AvaliacaoBusinessImp extends GenericBusinessImp<Avaliacao, Avaliaca
 	
 	@In
 	private AvaliacaoBebidaBusiness avaliacaoBebidaBusiness;
+	
+	@Override
+	public List<Avaliacao> pesquisarAvalicaoPorUsuario(Usuario usuario) {
+		return getDao().pesquisarAvalicaoPorUsuario(usuario);
+	}
+	
+	@Override
+	public List<Avaliacao> pesquisarAvaliacaoPorUsuarioTipoEndereco(Usuario usuario, 
+			TipoEstabelecimentoEnum tipo, String endereco) {
+		return getDao().pesquisarAvaliacaoPorUsuarioTipoEndereco(usuario, tipo, endereco);
+	}
 	
 	@Override
 	protected void validateRemove(Avaliacao avaliacao) throws BusinessException {

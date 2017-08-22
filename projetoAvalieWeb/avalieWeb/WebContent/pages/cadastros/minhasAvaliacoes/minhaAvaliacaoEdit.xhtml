@@ -18,11 +18,15 @@
 	<ui:param name="onLoadJS" value="document.getElementById('frm_edit:nomeField:txt_nome').focus();" />
 
 	<ui:define name="body">
+		<a:include viewId="/pages/cadastros/minhasAvaliacoes/adicionar_comida_modal.xhtml" />
+		<a:include viewId="/pages/cadastros/minhasAvaliacoes/adicionar_bebida_modal.xhtml" />
+		<a:include viewId="/pages/cadastros/minhasAvaliacoes/tipo_comida_confirmacao_exclusao.xhtml" />
+		<a:include viewId="/pages/cadastros/minhasAvaliacoes/tipo_bebida_confirmacao_exclusao.xhtml" />
 
 		<h:form id="frm_edit">
 			<rich:panel>
-				<h:outputText value="#{!avaliacaoAction.modoEdicao ? 'Cadastrar': 'Visualizar'} " styleClass="titulonegrito"/>
-				<h:outputText value="Avaliação" styleClass="titulo_cabecalho"/>
+				<h:outputText value="#{!minhaAvaliacaoAction.modoEdicao ? 'Cadastrar Avaliação ': 'Editar Avaliação '} " styleClass="titulonegrito"/>
+				<h:outputText value="#{minhaAvaliacaoAction.avaliacaoEdicao.usuario.email}" styleClass="titulo_cabecalho"/>
 				<rich:separator height="1px"></rich:separator>
 				<br/>
 				<rich:messages id="messages" styleClass="message" layout="table" 
@@ -32,24 +36,18 @@
 				
 					<rich:tabPanel switchType="client">
 						<rich:tab label="Geral">
-						
-							<s:decorate id="usuarioField" template="/pages/layout/edit.xhtml">
-								<ui:define name="label">Avaliado por:</ui:define>
-								
-								<h:inputText id="txt_usuario" label="Usuario" 
-									maxlength="255" size="40" readonly="true"
-									value="#{avaliacaoAction.avaliacaoEdicao.usuario.email}">
-								</h:inputText>
-							</s:decorate>
-						
-							<br/>
 							
 							<s:decorate id="estabelecimentoField" template="/pages/layout/edit.xhtml">
 								<ui:define name="label">Estabelecimento:</ui:define>
-								<h:inputText id="txt_estabelecimento" label="Estabelecimento" 
-									maxlength="255" size="40" readonly="true"
-									value="#{avaliacaoAction.avaliacaoEdicao.estabelecimento.nome}">
-								</h:inputText>
+								<h:selectOneMenu id="cmp_estabelecimento"
+									value="#{minhaAvaliacaoAction.avaliacaoEdicao.estabelecimento}" style="width:350px;"
+									label="Estabelecimento">
+									<s:selectItems var="estabelecimento"
+										value="#{estabelecimentoListaFactory}"
+										label="#{estabelecimento.nome}"
+										noSelectionLabel="-- Selecionar --" />
+									<s:convertEntity />
+								</h:selectOneMenu>
 							</s:decorate>
 						
 							<fieldset>
@@ -58,20 +56,20 @@
 									<s:decorate id="velocidadeField" template="/pages/layout/edit.xhtml">
 										<ui:define name="label">Velocidade:</ui:define>
 										<h:inputText id="txt_velocidade_internet" label="Velocidade" 
-											maxlength="255" size="20" readonly="true"
-											value="#{avaliacaoAction.avaliacaoEdicao.velocidadeInternet}">
+											maxlength="255" size="20"
+											value="#{minhaAvaliacaoAction.avaliacaoEdicao.velocidadeInternet}">
 										</h:inputText>
 									</s:decorate>
 									<s:decorate id="internetAbertaField" template="/pages/layout/edit.xhtml">
 										<ui:define name="label">Aberta:</ui:define>
-										<h:selectBooleanCheckbox id="chk_internet_aberta" readonly="true"
-											value="#{avaliacaoAction.avaliacaoEdicao.internetAberta}" label="Internet Aberta" />
+										<h:selectBooleanCheckbox id="chk_internet_aberta"
+											value="#{minhaAvaliacaoAction.avaliacaoEdicao.internetAberta}" label="Internet Aberta" />
 									</s:decorate>
 									<s:decorate id="senhaInternetField" template="/pages/layout/edit.xhtml">
 										<ui:define name="label">Senha:</ui:define>
-										<h:inputText id="txt_senha_internet" label="Senha" readonly="true"
+										<h:inputText id="txt_senha_internet" label="Senha" 
 											maxlength="255" size="20"
-											value="#{avaliacaoAction.avaliacaoEdicao.senhaInternet}">
+											value="#{minhaAvaliacaoAction.avaliacaoEdicao.senhaInternet}">
 										</h:inputText>
 									</s:decorate>
 								</h:panelGrid>
@@ -82,8 +80,7 @@
 								<rich:panel>
 									<s:decorate id="atendimentoField" template="/pages/layout/edit.xhtml">
 										<ui:define name="label">Avaliação Atendimento:</ui:define>
-										<h:selectOneRadio id="cmb_atendimento" value="#{avaliacaoAction.avaliacaoEdicao.atendimento}" 
-											label="Atendimento" readonly="true">
+										<h:selectOneRadio id="cmb_atendimento" value="#{minhaAvaliacaoAction.avaliacaoEdicao.atendimento}" label="Atendimento">
 											<f:selectItem itemLabel="1" itemValue="1"/>
 											<f:selectItem itemLabel="2" itemValue="2"/>
 											<f:selectItem itemLabel="3" itemValue="3"/>
@@ -96,8 +93,7 @@
 								<rich:panel>
 									<s:decorate id="precoField" template="/pages/layout/edit.xhtml">
 										<ui:define name="label">Avaliação Preço:</ui:define>
-										<h:selectOneRadio id="cmb_preco" value="#{avaliacaoAction.avaliacaoEdicao.preco}" 
-											label="Preço"  readonly="true">
+										<h:selectOneRadio id="cmb_preco" value="#{minhaAvaliacaoAction.avaliacaoEdicao.preco}" label="Preço">
 											<f:selectItem itemLabel="1" itemValue="1"/>
 											<f:selectItem itemLabel="2" itemValue="2"/>
 											<f:selectItem itemLabel="3" itemValue="3"/>
@@ -110,8 +106,7 @@
 								<rich:panel>
 									<s:decorate id="confortoField" template="/pages/layout/edit.xhtml">
 										<ui:define name="label">Avaliação Conforto:</ui:define>
-										<h:selectOneRadio id="cmb_conforto" value="#{avaliacaoAction.avaliacaoEdicao.conforto}" 
-											label="Preço"  readonly="true">
+										<h:selectOneRadio id="cmb_conforto" value="#{minhaAvaliacaoAction.avaliacaoEdicao.conforto}" label="Preço">
 											<f:selectItem itemLabel="1" itemValue="1"/>
 											<f:selectItem itemLabel="2" itemValue="2"/>
 											<f:selectItem itemLabel="3" itemValue="3"/>
@@ -124,8 +119,7 @@
 								<rich:panel>
 									<s:decorate id="ruidoField" template="/pages/layout/edit.xhtml">
 										<ui:define name="label">Avaliação Ruído:</ui:define>
-										<h:selectOneRadio id="cmb_ruido" value="#{avaliacaoAction.avaliacaoEdicao.ruido}" 
-											label="Preço"  readonly="true">
+										<h:selectOneRadio id="cmb_ruido" value="#{minhaAvaliacaoAction.avaliacaoEdicao.ruido}" label="Preço">
 											<f:selectItem itemLabel="1" itemValue="1"/>
 											<f:selectItem itemLabel="2" itemValue="2"/>
 											<f:selectItem itemLabel="3" itemValue="3"/>
@@ -138,8 +132,7 @@
 								<rich:panel>
 									<s:decorate id="geralField" template="/pages/layout/edit.xhtml">
 										<ui:define name="label">Avaliação Geral:</ui:define>
-										<h:selectOneRadio id="cmb_geral" value="#{avaliacaoAction.avaliacaoEdicao.geral}" 
-											label="Preço"  readonly="true">
+										<h:selectOneRadio id="cmb_geral" value="#{minhaAvaliacaoAction.avaliacaoEdicao.geral}" label="Preço">
 											<f:selectItem itemLabel="1" itemValue="1"/>
 											<f:selectItem itemLabel="2" itemValue="2"/>
 											<f:selectItem itemLabel="3" itemValue="3"/>
@@ -155,11 +148,16 @@
 						
 						<rich:tab label="Comida">
 							<h:panelGroup id="pn_lista_comida">
+								<h:panelGrid columns="1">
+									<a:commandButton id="btn_adicionar_comida" value="Adicionar Novo"
+										action="#{minhaAvaliacaoAction.prepararAdicionarComida(minhaAvaliacaoAction.avaliacaoEdicao)}" 
+										title="Adicionar Novo" ajaxSingle="true" reRender="mpn_adicao_comida"/>
+								</h:panelGrid>
 								<br />
 								
-								<rich:dataTable value="#{avaliacaoAction.avaliacaoComidaLista}"
+								<rich:dataTable value="#{minhaAvaliacaoAction.avaliacaoComidaLista}"
 									var="avaliacaoComidaBean"
-									rendered="#{not empty avaliacaoAction.avaliacaoComidaLista}"
+									rendered="#{not empty minhaAvaliacaoAction.avaliacaoComidaLista}"
 									sortMode="single" id="dtt_tipo_comida"
 									rowClasses="tabela-linha1, tabela-linha2" rowKeyVar="rowNum"
 									width="100%">
@@ -173,6 +171,25 @@
 											<h:outputText value="Tipo de Comida" />
 										</f:facet>
 										<h:outputText value="#{avaliacaoComidaBean.tipoComida}" />
+									</rich:column>
+			
+									<rich:column width="10%">
+										<f:facet name="header">
+											<h:outputText value="Ações" />
+										</f:facet>
+										<center>
+											<h:panelGrid columns="3">
+												<a:commandLink
+													action="#{minhaAvaliacaoAction.prepararExclusaoComida(avaliacaoComidaBean)}"
+													ajaxSingle="true"
+													reRender="pn_lista_comida, frm_modal_confirmacao_tipo_comida, mpn_confirmacao_exclusao_comida"
+													onclick="Richfaces.showModalPanel('modalPanelProcessandoId');"
+													oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');">
+													<h:graphicImage url="/img/cross.png" style="border:0px" title="Excluir Tipo Comida" />
+												</a:commandLink>
+			
+											</h:panelGrid>
+										</center>
 									</rich:column>
 									
 									<br />
@@ -190,12 +207,16 @@
 						
 						<rich:tab label="Bebida">
 							<h:panelGroup id="pn_lista_bebida">
-								
+								<h:panelGrid columns="1">
+									<a:commandButton id="btn_adicionar_bebida" value="Adicionar Novo"
+										action="#{minhaAvaliacaoAction.prepararAdicionarBebida(minhaAvaliacaoAction.avaliacaoEdicao)}" 
+										title="Adicionar Novo" ajaxSingle="true" reRender="mpn_adicao_bebida"/>
+								</h:panelGrid>
 								<br />
 								
-								<rich:dataTable value="#{avaliacaoAction.avaliacaoBebidaLista}"
+								<rich:dataTable value="#{minhaAvaliacaoAction.avaliacaoBebidaLista}"
 									var="avaliacaoBebidaBean"
-									rendered="#{not empty avaliacaoAction.avaliacaoBebidaLista}"
+									rendered="#{not empty minhaAvaliacaoAction.avaliacaoBebidaLista}"
 									sortMode="single" id="dtt_tipo_bebida"
 									rowClasses="tabela-linha1, tabela-linha2" rowKeyVar="rowNum"
 									width="100%">
@@ -211,6 +232,25 @@
 										<h:outputText value="#{avaliacaoBebidaBean.tipoBebida}" />
 									</rich:column>
 			
+									<rich:column width="10%">
+										<f:facet name="header">
+											<h:outputText value="Ações" />
+										</f:facet>
+										<center>
+											<h:panelGrid columns="3">
+												<a:commandLink
+													action="#{minhaAvaliacaoAction.prepararExclusaoBebida(avaliacaoBebidaBean)}"
+													ajaxSingle="true"
+													reRender="pn_lista_bebida, frm_modal_confirmacao_tipo_bebida, mpn_confirmacao_exclusao_bebida"
+													onclick="Richfaces.showModalPanel('modalPanelProcessandoId');"
+													oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');">
+													<h:graphicImage url="/img/cross.png" style="border:0px" title="Excluir Tipo Bebida" />
+												</a:commandLink>
+			
+											</h:panelGrid>
+										</center>
+									</rich:column>
+									
 									<br />
 			
 									<f:facet name="footer">
@@ -230,10 +270,17 @@
 				</h:panelGrid>
 
 				<div class="actionbuttons">
-					<h:panelGrid columns="1">
+					<h:panelGrid columns="3">
 						<a:commandButton id="btn_voltar" value="Voltar" immediate="true"
-							action="#{avaliacaoAction.voltar()}" type="button"
+							action="#{minhaAvaliacaoAction.voltar()}" type="button"
 							title="Página Anterior" />
+						<a:commandButton value="Limpar" id="btn_limpar"
+							rendered="#{!minhaAvaliacaoAction.modoEdicao}"
+							action="#{minhaAvaliacaoAction.limparCamposEdicao()}" title="Limpar"
+							reRender="pn_edit" immediate="true" />
+						<a:commandButton value="Salvar" id="btn_salvar"
+							action="#{minhaAvaliacaoAction.salvar()}" title="Salvar"
+							reRender="pn_edit" />
 					</h:panelGrid>	
 				</div>
 

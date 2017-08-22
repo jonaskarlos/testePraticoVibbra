@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.com.vibbra.avalieweb.enumeration.TipoEstabelecimentoEum;
+import br.com.vibbra.avalieweb.enumeration.TipoEstabelecimentoEnum;
 
 @Entity
 @Table(name="tb_estabelecimento")
@@ -41,7 +41,7 @@ public class Estabelecimento extends GenericEntity {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name="txt_tipo")
-	private TipoEstabelecimentoEum tipo;
+	private TipoEstabelecimentoEnum tipo;
 
 	public Long getId() {
 		return id;
@@ -91,11 +91,11 @@ public class Estabelecimento extends GenericEntity {
 		this.pais = pais;
 	}
 
-	public TipoEstabelecimentoEum getTipo() {
+	public TipoEstabelecimentoEnum getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoEstabelecimentoEum tipo) {
+	public void setTipo(TipoEstabelecimentoEnum tipo) {
 		this.tipo = tipo;
 	}
 	

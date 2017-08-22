@@ -138,8 +138,6 @@ public class UsuarioAction extends GenericAction {
 			
 			usuarioBusiness.salvar(usuarioEdicao);
 			
-			jsfUtil.setSessionAttribute("usuarioLogado", usuarioEdicao);
-
 			if (modoEdicao)
 				jsfUtil.showInfoMessage("atualizado.sucesso", USUARIO + " - " + usuarioEdicao.getEmail());
 			else {

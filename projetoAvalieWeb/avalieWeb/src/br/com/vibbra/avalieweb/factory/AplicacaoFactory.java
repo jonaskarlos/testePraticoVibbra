@@ -8,8 +8,10 @@ import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 
 import br.com.vibbra.avalieweb.business.EstabelecimentoBusiness;
+import br.com.vibbra.avalieweb.business.UsuarioBusiness;
 import br.com.vibbra.avalieweb.entity.Estabelecimento;
-import br.com.vibbra.avalieweb.enumeration.TipoEstabelecimentoEum;
+import br.com.vibbra.avalieweb.entity.Usuario;
+import br.com.vibbra.avalieweb.enumeration.TipoEstabelecimentoEnum;
 
 @Name("aplicacaoFactory")
 public class AplicacaoFactory {
@@ -17,14 +19,22 @@ public class AplicacaoFactory {
 	@In
 	private EstabelecimentoBusiness estabelecimentoBusiness;
 	
+	@In
+	private UsuarioBusiness usuarioBusiness;
+	
 	@Factory(value="tipoEstabelecimentoListaFactory", scope=ScopeType.SESSION)
-	public TipoEstabelecimentoEum[] getTipoProcessamentoArray() {
-		return TipoEstabelecimentoEum.values();
+	public TipoEstabelecimentoEnum[] getTipoProcessamentoArray() {
+		return TipoEstabelecimentoEnum.values();
 	}
 	
 	@Factory(value="estabelecimentoListaFactory", scope=ScopeType.CONVERSATION)
-	public List<Estabelecimento> pesquisarEstados(){
+	public List<Estabelecimento> pesquisarEstabelecimentos(){
 		return estabelecimentoBusiness.findAll("nome");		
+	}
+	
+	@Factory(value="usuarioListaFactory", scope=ScopeType.CONVERSATION)
+	public List<Usuario> pesquisarUsuarios(){
+		return usuarioBusiness.findAll("email");		
 	}
 	
 	

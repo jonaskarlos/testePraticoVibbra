@@ -1,6 +1,6 @@
 package br.com.vibbra.avalieweb.enumeration;
 
-public enum TipoEstabelecimentoEum {
+public enum TipoEstabelecimentoEnum {
 	
 	C ("Café"),
 	R ("Restaurante"),
@@ -10,7 +10,7 @@ public enum TipoEstabelecimentoEum {
 
 	private String descricao;
 
-	private TipoEstabelecimentoEum(String descricao) {
+	private TipoEstabelecimentoEnum(String descricao) {
 		this.descricao = descricao;
 	}
 

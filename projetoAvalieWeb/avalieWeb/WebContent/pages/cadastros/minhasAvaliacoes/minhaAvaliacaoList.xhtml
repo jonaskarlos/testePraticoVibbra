@@ -20,24 +20,54 @@
 		value="document.getElementById('frm_pesquisa:nomeField:txt_nome').focus();" />
 
 	<ui:define name="body">
+		<a:include viewId="/pages/cadastros/minhasAvaliacoes/minhaAvaliacao_confirmacao_exclusao.xhtml" />
 		<h:form id="frm_pesquisa">
 			<rich:panel>
-				<h:outputText value="Pesquisar " styleClass="titulonegrito" />
-				<h:outputText value="Avaliações"
-					styleClass="titulo_cabecalho" />
+				<h:outputText value="Pesquisar Avaliações - " styleClass="titulonegrito" />
+				<h:outputText value="#{minhaAvaliacaoAction.usuarioLogado.email}" styleClass="titulo_cabecalho" />
 				<rich:separator height="1px"></rich:separator>
 				<br />
 				
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="2" id="pn_pesquisa">
+				
+					<s:decorate id="tipoField" for="cmb_tipo" template="/pages/layout/edit.xhtml">
+						<ui:define name="label">
+							<h:outputText value="Tipo Estabelecimento:" />
+						</ui:define>
+						<h:selectOneMenu id="cmb_tipo"
+							value="#{minhaAvaliacaoAction.tipoEstabelecimentoPesquisa}" style="width:150px"
+							label="Tipo Estabelecimento">
+							<s:selectItems var="tipoEstabelecimento"
+								value="#{tipoEstabelecimentoListaFactory}"
+								label="#{tipoEstabelecimento.descricao}" 
+								noSelectionLabel="-- Todos --" />
+							<s:convertEnum />
+						</h:selectOneMenu>
+					</s:decorate>
+					
+					<s:decorate id="enderecoField" template="/pages/layout/edit.xhtml">
+						<ui:define name="label">Endereço:</ui:define>
+						<h:inputText id="txt_endereco" label="Endereço" 
+							maxlength="255" size="45"
+							value="#{minhaAvaliacaoAction.enderecoPesquisa}">
+						</h:inputText>
+					</s:decorate>
+
+				</h:panelGrid>
+				
+				
+				<h:panelGrid columns="3">
 					<a:commandButton id="btn_pesq" value="Pesquisar"
-						action="#{avaliacaoAction.pesquisar()}"
+						action="#{minhaAvaliacaoAction.pesquisar()}"
 						reRender="pn_pesquisa, pn_lista"
 						title="Executar Pesquisa"
 						onclick="Richfaces.showModalPanel('modalPanelProcessandoId');"
 						oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');" />
 					<a:commandButton id="btn_limpar" value="Limpar"
-						action="#{avaliacaoAction.limpar()}" immediate="true"
+						action="#{minhaAvaliacaoAction.limpar()}" immediate="true"
 						reRender="pn_pesquisa" title="Limpar Campos" />
+					<a:commandButton id="btn_adicionar" value="Adicionar"
+						action="#{minhaAvaliacaoAction.adicionar()}" title="Adicionar Nova Avaliação" /> 
 				</h:panelGrid>
 				<rich:hotKey selector="#pn_pesquisa" key="return"
 					handler="#{rich:element('btn_pesq')}.onclick();return false;" />
@@ -49,13 +79,13 @@
 			<br />
 			<h:panelGroup id="pn_lista">
 				<h:outputText styleClass="resultados_encontrados"
-					value="#{avaliacaoAction.avaliacaoLista.size()} #{avaliacaoAction.avaliacaoLista.size() eq 1? ' Avaliacao Encontrado.':' Avaliacaos Encontrados.'}"
-					rendered="#{not empty avaliacaoAction.avaliacaoLista and avaliacaoAction.avaliacaoLista != null}" />
+					value="#{minhaAvaliacaoAction.avaliacaoLista.size()} #{minhaAvaliacaoAction.avaliacaoLista.size() eq 1? ' Avaliacao Encontrado.':' Avaliacaos Encontrados.'}"
+					rendered="#{not empty minhaAvaliacaoAction.avaliacaoLista and minhaAvaliacaoAction.avaliacaoLista != null}" />
 
 				<br />
-				<rich:dataTable value="#{avaliacaoAction.avaliacaoLista}" var="avaliacaoBean"
-					rows="#{avaliacaoAction.numeroLinha}"
-					rendered="#{not empty avaliacaoAction.avaliacaoLista}" sortMode="single"
+				<rich:dataTable value="#{minhaAvaliacaoAction.avaliacaoLista}" var="avaliacaoBean"
+					rows="#{minhaAvaliacaoAction.numeroLinha}"
+					rendered="#{not empty minhaAvaliacaoAction.avaliacaoLista}" sortMode="single"
 					id="dtt_avaliacao" rowClasses="tabela-linha1, tabela-linha2"
 					rowKeyVar="rowNum" width="100%">
 					<rich:column styleClass="alinharCentro " width="5px">
@@ -124,11 +154,20 @@
 							<h:outputText value="Ações" />
 						</f:facet>
 						<center>
-							<h:panelGrid columns="1">
+							<h:panelGrid columns="2">
 								<a:commandLink
-									action="#{avaliacaoAction.editar(avaliacaoBean)}" ajaxSingle="true" reRender="pn_lista">
-									<h:graphicImage url="/img/edit.png" style="border:0px;padding:0px" title="Visualizar" />
+									action="#{minhaAvaliacaoAction.editar(avaliacaoBean)}" ajaxSingle="true" reRender="pn_lista">
+									<h:graphicImage url="/img/edit.png" style="border:0px;padding:0px" title="Editar" />
 								</a:commandLink>
+								
+								<a:commandLink
+									action="#{minhaAvaliacaoAction.prepararExclusao(avaliacaoBean)}"
+									ajaxSingle="true" reRender="pn_lista, mpn_confirmacao_exclusao"
+									onclick="Richfaces.showModalPanel('modalPanelProcessandoId');"
+									oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');">
+									<h:graphicImage url="/img/cross.png" style="border:0px" title="Excluir" />
+								</a:commandLink>
+								
 							</h:panelGrid>
 						</center>
 					</rich:column>

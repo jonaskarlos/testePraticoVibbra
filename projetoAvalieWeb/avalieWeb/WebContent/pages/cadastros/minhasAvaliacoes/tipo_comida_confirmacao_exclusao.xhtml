@@ -8,33 +8,33 @@
 	xmlns:a="http://richfaces.org/a4j">
 <body>
 
-	<rich:modalPanel id="mpn_confirmacao_exclusao_bebida" resizeable="false"
-		showWhenRendered="#{avaliacaoAction.exibirModalExclusaoTipoBebida}" width="350"
+	<rich:modalPanel id="mpn_confirmacao_exclusao_comida" resizeable="false"
+		showWhenRendered="#{minhaAvaliacaoAction.exibirModalExclusaoTipoComida}" width="350"
 		height="80" autosized="true" style="border-spacing:0px">
 		<f:facet name="header">
-			<h:outputText value="Excluir Tipo de Bebida" />
+			<h:outputText value="Excluir Tipo de Comida" />
 		</f:facet>
 		<f:facet name="controls">
 			<h:graphicImage value="/img/cancel.png" style="cursor:pointer"
-				onclick="Richfaces.hideModalPanel('mpn_confirmacao_exclusao_bebida')" />
+				onclick="Richfaces.hideModalPanel('mpn_confirmacao_exclusao_comida')" />
 		</f:facet>
 
-		<h:form id="frm_modal_confirmacao_tipo_bebida">
-			<h:outputText value="Tem certeza que deseja excluir o Tipo de Bebida?" />
+		<h:form id="frm_modal_confirmacao_tipo_comida">
+			<h:outputText value="Tem certeza que deseja excluir o Tipo de Comida?" />
 			<p />
 			<center>
 				<h:panelGrid columns="3">
 					<a:commandButton id="btn_confirm_exclusao"
-						action="#{avaliacaoAction.excluirTipoBebida()}" value="Sim"
-						reRender="pn_lista_bebida, messages, mpn_confirmacao_exclusao_bebida"
+						action="#{minhaAvaliacaoAction.excluirTipoComida()}" value="Sim"
+						reRender="pn_lista_comida, messages, mpn_confirmacao_exclusao_comida"
 						onclick="Richfaces.showModalPanel('modalPanelProcessandoId');"
 						style="width:70px"
 						oncomplete="Richfaces.hideModalPanel('modalPanelProcessandoId');">
 					</a:commandButton>
 					<rich:spacer width="5" />
 					<a:commandButton value="Não" style="width:70px"
-						id="btn_cancel_exclusao" reRender="mpn_confirmacao_exclusao_bebida"
-						action="#{avaliacaoAction.cancelarExclusaoBebida()}" />
+						id="btn_cancel_exclusao" reRender="mpn_confirmacao_exclusao_comida"
+						action="#{minhaAvaliacaoAction.cancelarExclusaoComida()}" />
 				</h:panelGrid>
 				<rich:messages id="messages" styleClass="message" layout="table"
 					globalOnly="true" errorClass="errormsg" infoMarkerClass="infomsg"

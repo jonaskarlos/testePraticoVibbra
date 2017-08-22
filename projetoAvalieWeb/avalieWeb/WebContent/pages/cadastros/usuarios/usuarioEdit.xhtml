@@ -30,7 +30,7 @@
 					</rich:messages>
 				<h:panelGrid id="pn_edit">
 
-					<h:panelGrid columns="3">
+					<h:panelGrid columns="2">
 						<s:decorate id="nomeField" template="/pages/layout/edit.xhtml">
 							<ui:define name="label">E-mail:</ui:define>
 							<h:inputText id="txt_nome" label="Nome" required="true"
@@ -41,7 +41,7 @@
 						
 						<s:decorate id="senhaField" template="/pages/layout/edit.xhtml">
 							<ui:define name="label">Senha:</ui:define>
-							<h:inputSecret id="txt_senha" label="Senha"
+							<h:inputSecret id="txt_senha" label="Senha" required="true"
 								value="#{usuarioAction.usuarioEdicao.senha}" />
 						</s:decorate>
 						

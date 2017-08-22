@@ -91,6 +91,10 @@
   <output ID="/pages/avaliacoes/avaliacaoList.xhtml" NAME="output4"
    PATH="/pages/avaliacoes/avaliacaoList.xhtml"
    TARGET="#xpages#xavaliacoes#xavaliacaoList.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
+  <output ID="/pages/cadastros/loginUsuario/loginUsuario.xhtml"
+   NAME="output5"
+   PATH="/pages/cadastros/loginUsuario/loginUsuario.xhtml"
+   TARGET="#xpages#xcadastros#xloginUsuario#xloginUsuario.xhtml" model-entity="SeamPagesDiagramItemOutput"/>
  </item>
  <item
   NAME="#xpages#xbusca#xestabelecimentos#xestabelecimentoList.xhtml"
@@ -107,4 +111,7 @@
  <item NAME="#xpages#xcadastros#xusuarios#xusuarioEdit.xhtml"
   PATH="/pages/cadastros/usuarios/usuarioEdit.xhtml"
   SHAPE="472,1881,0,0" TYPE="page" model-entity="SeamPagesDiagramItem"/>
+ <item NAME="#xpages#xcadastros#xloginUsuario#xloginUsuario.xhtml"
+  PATH="/pages/cadastros/loginUsuario/loginUsuario.xhtml"
+  SHAPE="472,1905,0,0" TYPE="page" model-entity="SeamPagesDiagramItem"/>
 </diagram>

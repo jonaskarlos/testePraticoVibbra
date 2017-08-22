@@ -10,7 +10,7 @@
 <body>
 
 		<rich:modalPanel id="mpn_adicao_comida" resizeable="false"
-			showWhenRendered="#{avaliacaoAction.exibirModalAdicaoComida}"
+			showWhenRendered="#{minhaAvaliacaoAction.exibirModalAdicaoComida}"
 			width="400" height="200" autosized="false" style="border-spacing:0px">
 
 			<f:facet name="header">
@@ -25,7 +25,7 @@
 					infoClass="infomsg">
 				</rich:messages>
 
-				<rich:panel rendered="#{avaliacaoAction.modoEdicaoComida}">
+				<rich:panel rendered="#{minhaAvaliacaoAction.modoEdicaoComida}">
 					<h:outputText value="Adicionar Tipo de Comida" styleClass="titulo_cabecalho" />
 					<rich:separator height="1px"></rich:separator>
 					<br />
@@ -33,7 +33,7 @@
 					<h:panelGrid id="pn_edit_comida_detail" columns="1">
 						<s:decorate id="tipoComidaField" template="/pages/layout/edit.xhtml">
 							<ui:define name="label">Tipo de Comida:</ui:define>
-							<h:inputText id="txt_tipo_comida" value="#{avaliacaoAction.avaliacaoComida.tipoComida}" maxlength="30" size="40"
+							<h:inputText id="txt_tipo_comida" value="#{minhaAvaliacaoAction.avaliacaoComida.tipoComida}" maxlength="30" size="40"
 								label="Tipo de Comida" required="true">
 							</h:inputText>
 						</s:decorate>
@@ -41,12 +41,12 @@
 
 					<h:panelGrid columns="2">
 					<a:commandButton value="Cancelar" id="btn_cancelar_add_comida"
-						action="#{avaliacaoAction.cancelarAddComida()}"
+						action="#{minhaAvaliacaoAction.cancelarAddComida()}"
 						title="Cancelar" ajaxSingle="true" 
 						reRender="mpn_adicao_comida" />
 					<a:commandButton value="Salvar"
 						id="btn_salvar"
-						action="#{avaliacaoAction.salvarTipoComida()}"
+						action="#{minhaAvaliacaoAction.salvarTipoComida()}"
 						title="Salvar Tipo de Comida"
 						reRender="frm_pesquisa_edit_detail, pn_lista_comida, mpn_adicao_comida" />
 				</h:panelGrid>
